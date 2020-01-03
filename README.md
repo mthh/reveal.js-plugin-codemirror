@@ -61,7 +61,7 @@ function ItWorks() {
 ex:AliceInWonderland a ex:Book ;
   ex:title "Alice in Wonderland"@en ;
   ex:author "Lewis Carroll" ;
-	ex:datePublished "1865-11-26"^^xsd:date .
+  ex:datePublished "1865-11-26"^^xsd:date .
 ```
     </textarea>
   </section>
@@ -78,7 +78,7 @@ ex:AliceInWonderland a ex:Book ;
       ex:AliceInWonderland a ex:Book ;
         ex:title "Alice in Wonderland"@en ;
         ex:author "Lewis Carroll" ;
-      	ex:datePublished "1865-11-26"^^xsd:date .
+        ex:datePublished "1865-11-26"^^xsd:date .
       </code>
     </pre>
   </section>
