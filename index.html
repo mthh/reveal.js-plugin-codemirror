@@ -110,11 +110,6 @@ function draw() {
 		</div>
 		<script src="js/reveal.js"></script>
 		<script>
-			document.querySelectorAll('section[data-markdown]')
-				.forEach((el) => {
-					el.setAttribute('data-separator', '^\n----\n$');
-					el.setAttribute('data-separator-vertical', '^\n---\n$');
-				});
 			Reveal.initialize({
 				codemirrorHighlight: {
 					default_lang: 'turtle',
