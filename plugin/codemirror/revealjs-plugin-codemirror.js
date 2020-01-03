@@ -26,7 +26,7 @@ const get_used_languages = (default_lang) => {
   const langs = [default_lang]
   document.querySelectorAll('pre > code[class]')
     .forEach((el) => {
-      let lang = Array.from(el.classList)
+      const lang = Array.from(el.classList)
         .filter((el) => el.indexOf('language-') > -1)
         .map(el => el.replace('language-', ''));
       if (lang.length > 0 && lang[0] !== default_lang) {
@@ -39,7 +39,7 @@ const get_used_languages = (default_lang) => {
 const highlight_content = (default_lang, theme_name) => {
   document.querySelectorAll('pre > code')
     .forEach((el) => {
-      let code_content = el.textContent;
+      const code_content = el.textContent;
       let lang = Array.from(el.classList)
         .filter((el) => el.indexOf('language-') > -1)
         .map(el => el.replace('language-', ''));
@@ -91,7 +91,9 @@ const RevealCodeMirror = window.RevealCodeMirror || (function() {
   const cb = (filename) => {
     files_to_load[filename] = true;
     if (Object.values(files_to_load).every(v => v === true)) {
-      highlight_content(default_lang, theme_name);
+      setTimeout(() => {
+        highlight_content(default_lang, theme_name);
+      }, 25);
     }
   };
 
