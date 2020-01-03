@@ -17,9 +17,6 @@
 			.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
 				margin: 0 0 30px 0;
 			}
-			.reveal code.CodeMirror {
-				height: unset !important;
-			}
 			.reveal .small { font-size: 0.5em; }
 			.reveal .small2 pre:last-of-type {
 				font-size: 0.45em;
@@ -159,11 +156,6 @@ Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Bas
 		</div>
 		<script src="js/reveal.js"></script>
 		<script>
-			document.querySelectorAll('section[data-markdown]')
-				.forEach((el) => {
-					el.setAttribute('data-separator', '^\n----\n$');
-					el.setAttribute('data-separator-vertical', '^\n---\n$');
-				});
 
 			Reveal.initialize({
 				codemirrorHighlight: {
