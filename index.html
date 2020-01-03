@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+		<title>Reveal.js-plugin-codemirror demo</title>
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/beige.css">
+		<style>
+			.reveal {
+				font-size: 34px !important;
+			}
+			.reveal h3, .reveal h4, .reveal h5, .reveal h6 {
+				text-transform: none;
+			}
+			.reveal h1, .reveal h2, .reveal h3, .reveal h4 {
+				margin: 0 0 30px 0;
+			}
+			.reveal code.CodeMirror {
+				height: unset !important;
+			}
+		</style>
+		<script>
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild( link );
+		</script>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+## Reveal.js-plugin-codemirror demo
+
+<br><br>
+
+**A reveal.js plugin allowing a smooth integration of CodeMirror, only to use its _highlighting_ functions**
+
+https://github.com/mthh/reveal.js-plugin-codemirror
+					</textarea>
+				</section>
+				<section data-markdown class="table-slide">
+					<textarea data-template>
+### Reveal.js-plugin-codemirror demo (1)
+
+#### Code in default language:
+
+```
+ex:BookShape1
+	a sh:NodeShape ;
+	sh:targetClass ex:Book ;
+	sh:property [
+		sh:path ex:datePublished ;
+		sh:datatype xsd:date ;
+	] .
+```
+					</textarea>
+				</section>
+        <section data-markdown class="table-slide">
+          <textarea data-template>
+### Reveal.js-plugin-codemirror demo (2)
+
+#### Code in another language:
+
+
+```javascript
+function draw() {
+  var canvas = document.getElementById('canvas');
+  if (canvas.getContext) {
+    var ctx = canvas.getContext('2d');
+
+    ctx.fillStyle = 'rgb(200, 0, 0)';
+    ctx.fillRect(10, 10, 50, 50);
+
+    ctx.fillStyle = 'rgba(0, 0, 200, 0.5)';
+    ctx.fillRect(30, 30, 50, 50);
+  }
+}
+```
+
+*Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage*
+          </textarea>
+        </section>
+        <section data-markdown class="table-slide">
+          <textarea data-template>
+### Reveal.js-plugin-codemirror demo (3)
+
+#### Yet another language !
+
+```xml
+<!DOCTYPE html>
+<html>
+ <head>
+  <meta charset="utf-8"/>
+ </head>
+ <body>
+   <canvas id="canvas" width="150" height="150"></canvas>
+ </body>
+</html>
+```
+
+*Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage*
+          </textarea>
+        </section>
+			</div>
+		</div>
+		<script src="js/reveal.js"></script>
+		<script>
+			document.querySelectorAll('section[data-markdown]')
+				.forEach((el) => {
+					el.setAttribute('data-separator', '^\n----\n$');
+					el.setAttribute('data-separator-vertical', '^\n---\n$');
+				});
+			Reveal.initialize({
+				codemirrorHighlight: {
+					default_lang: 'turtle',
+					theme: 'dracula',
+					path: 'codemirror/'
+				},
+				dependencies: [
+					{ src: 'plugin/markdown/marked.js' },
+					{ src: 'plugin/markdown/markdown.js' },
+					{ src: 'plugin/codemirror/revealjs-plugin-codemirror.js', async: true },
+				],
+				hash: true,
+				slideNumber: 'c/t',
+			});
+		</script>
+	</body>
+</html>
