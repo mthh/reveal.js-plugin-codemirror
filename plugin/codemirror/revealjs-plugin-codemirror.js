@@ -113,11 +113,18 @@ const RevealCodeMirror = window.RevealCodeMirror || (function() {
     // the content of the `code` elements only when
     // all the js files are loaded
     let fn = () => {
-      loadjscssfile(urls_base[0])
-        .then((filename) => {
-          urls_base = urls_base.slice(1);
-          cb(filename, urls_base[0]);
-        });
+      const n = urls_base[0];
+      if (n && n.endsWith('.css')) {
+        loadjscssfile(n);
+        urls_base = urls_base.slice(1);
+        cb(n, urls_base[0]);
+      } else { // Load synchronously the JS files:
+        loadjscssfile(n)
+          .then((filename) => {
+            urls_base = urls_base.slice(1);
+            cb(filename, urls_base[0]);
+          });
+      }
     };
     fn();
   } else if (strategy === 'JsDeliver') {
