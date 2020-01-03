@@ -20,6 +20,13 @@
 			.reveal code.CodeMirror {
 				height: unset !important;
 			}
+			.reveal .small { font-size: 0.5em; }
+			.reveal .small2 pre:last-of-type {
+				font-size: 0.45em;
+			}
+			.reveal .small2 pre:last-of-type > code {
+				max-height: 550px;
+			}
 		</style>
 		<script>
 			var link = document.createElement('link');
@@ -43,26 +50,64 @@
 https://github.com/mthh/reveal.js-plugin-codemirror
 					</textarea>
 				</section>
-				<section data-markdown class="table-slide">
+				<section data-markdown>
 					<textarea data-template>
 ### Reveal.js-plugin-codemirror demo (1)
 
-#### Code in default language:
+#### Code in default language (here 'turtle' syntax for RDF):
 
 ```
-ex:BookShape1
-	a sh:NodeShape ;
-	sh:targetClass ex:Book ;
-	sh:property [
-		sh:path ex:datePublished ;
-		sh:datatype xsd:date ;
-	] .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+
+[ foaf:name "Alice" ] foaf:knows [
+    foaf:name "Bob" ;
+    foaf:knows [
+        foaf:name "Eve" ] ;
+    foaf:mbox <bob@example.com> ] .
+```
+
+<span class="small"><em>
+Source: https://www.w3.org/TR/turtle/#unlabeled-bnodes
+</em></span>
+					</textarea>
+				</section>
+				<section data-markdown class="small2">
+					<textarea data-template>
+### Reveal.js-plugin-codemirror demo (2)
+
+**_You can define the default syntax at plugin initialisation_**
+**_it avoids to add a language identifier on each code block_**
+
+```javascript
+Reveal.initialize({
+  codemirrorHighlight: {
+     // The default language,
+     // for fenced code block (or `code` elements) without language identifier
+     // (default: 'javascript')
+    default_lang: 'turtle',
+    // A specific CodeMirror theme to use (default: 'default')
+    theme: 'zenburn',
+    // The version number of CodeMirror to use
+    // if using the CDN strategy
+    // (default: 5, not used if `path` option is provided)
+    version: '5.50.2',
+    // A path to reach CodeMirror `lib`, `addon`, `theme`, etc. folders
+    // to fetch the appropriate modules needed
+    // (default: undefined, mandatory to avoid using the default CDN)
+    path: '/codemirror/',
+  },
+  dependencies: [
+    { src: 'plugin/codemirror/revealjs-plugin-codemirror.js', async: true },
+    ...
+  ],
+  ...
+});
 ```
 					</textarea>
 				</section>
         <section data-markdown class="table-slide">
           <textarea data-template>
-### Reveal.js-plugin-codemirror demo (2)
+### Reveal.js-plugin-codemirror demo (3)
 
 #### Code in another language:
 
@@ -82,14 +127,16 @@ function draw() {
 }
 ```
 
-*Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage*
+<span class="small"><em>
+Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage
+</em></span>
           </textarea>
         </section>
         <section data-markdown class="table-slide">
           <textarea data-template>
-### Reveal.js-plugin-codemirror demo (3)
+### Reveal.js-plugin-codemirror demo (4)
 
-#### Yet another language !
+#### *Yet another language !*
 
 ```xml
 <!DOCTYPE html>
@@ -103,13 +150,21 @@ function draw() {
 </html>
 ```
 
-*Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage*
+<span class="small"><em>
+Source: https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API/Tutorial/Basic_usage
+</em></span>
           </textarea>
         </section>
 			</div>
 		</div>
 		<script src="js/reveal.js"></script>
 		<script>
+			document.querySelectorAll('section[data-markdown]')
+				.forEach((el) => {
+					el.setAttribute('data-separator', '^\n----\n$');
+					el.setAttribute('data-separator-vertical', '^\n---\n$');
+				});
+
 			Reveal.initialize({
 				codemirrorHighlight: {
 					default_lang: 'turtle',
