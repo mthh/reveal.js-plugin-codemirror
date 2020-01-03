@@ -2,6 +2,10 @@
 
 *Enjoy a nice syntax highlighting for languages not supported by highlight.js on your reveal.js slides !*
 
+### Demo
+
+https://mthh.github.io/reveal.js-plugin-codemirror/
+
 ### Installation
 
 Simply place the content of the `codemirror`-directory within the reveal.js `plugin` directory.
