@@ -79,25 +79,18 @@ const RevealCodeMirror = window.RevealCodeMirror || (function() {
   addStyleString('.reveal code.CodeMirror { height: unset !important; }');
 
   // Container for the URL of the various files to be fetched
-  const urls_base = [];
-  // Store whether each requested file finished loading or not
-  const files_to_load = {};
+  let urls_base = [];
   // Parse the content of the slides a first time to detect the language in use
   const langs = get_used_languages(default_lang);
 
-  // Callback executed for each file, when loading is finished
-  // in order to decide if when can actually use CodeMirror
-  // and highlight our code elements
-  const cb = (filename) => {
-    files_to_load[filename] = true;
-    if (Object.values(files_to_load).every(v => v === true)) {
-      setTimeout(() => {
-        highlight_content(default_lang, theme_name);
-      }, 25);
-    }
-  };
-
   if (strategy === 'customPath') {
+    const cb = (filename, next) => {
+      if (!next) {
+        highlight_content(default_lang, theme_name);
+      } else {
+        fn();
+      }
+    };
     // We are using the path provided by the user,
     // it could be a path to a locally hosted version of codemirror
     // or the path to a CDN
@@ -116,21 +109,29 @@ const RevealCodeMirror = window.RevealCodeMirror || (function() {
     }
     // Load the lib/codemirror.js file first to ensure its present
     // when language files are loaded
-    loadjscssfile(urls_base[0])
-      .then(() => {
-        urls_base.splice(1)
-          .forEach((url) => {
-            if (url.endsWith('js')) {
-              files_to_load[url] = false;
-            }
-            // Load each file, and actually parse and highlight
-            // the content of the `code` elements only when
-            // all the js files are loaded
-            loadjscssfile(url)
-              .then(cb);
-          });
-      });
+    // Load each file, and actually parse and highlight
+    // the content of the `code` elements only when
+    // all the js files are loaded
+    let fn = () => {
+      loadjscssfile(urls_base[0])
+        .then((filename) => {
+          urls_base = urls_base.slice(1);
+          cb(filename, urls_base[0]);
+        });
+    };
+    fn();
   } else if (strategy === 'JsDeliver') {
+    // Store whether each requested file finished loading or not
+    const files_to_load = {};
+    // Callback executed for each file, when loading is finished
+    // in order to decide if when can actually use CodeMirror
+    // and highlight our code elements
+    const cb = (filename) => {
+      files_to_load[filename] = true;
+      if (Object.values(files_to_load).every(v => v === true)) {
+        highlight_content(default_lang, theme_name);
+      }
+    };
     urls_base.push(`https://cdn.jsdelivr.net/npm/codemirror@${version}/lib/codemirror.css`);
     urls_base.push(`https://cdn.jsdelivr.net/combine/npm/codemirror@${version},npm/codemirror@${version}/addon/runmode/runmode-standalone.js`);
     //  We are gonna use JsDeliver `combine` ---^
