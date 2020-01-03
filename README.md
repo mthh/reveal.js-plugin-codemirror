@@ -2,15 +2,13 @@
 
 *Enjoy a nice syntax highlighting for languages not supported by highlight.js on your reveal.js slides !*
 
-### Demo
-
-https://mthh.github.io/reveal.js-plugin-codemirror/
+**Demo slides:** https://mthh.github.io/reveal.js-plugin-codemirror/
 
 ### Installation
 
 Simply place the content of the `codemirror`-directory within the reveal.js `plugin` directory.
 
-This plugin it juste a wrapper to call `CodeMirror.runMode` and doesn't contain any code from `CodeMirror`.
+This plugin is just a wrapper to call `CodeMirror.runMode` and doesn't contain any code from `CodeMirror`.
 
 Two options are provided in order to fetch the appropriate `CodeMirror` modules, using a CDN (*JsDelivr*) or providing the path to theses modules (it allows to host theses files locally, or to use another CDN).
 
@@ -23,7 +21,7 @@ Reveal.initialize({
      // The default language,
      // for fenced code block (or `code` elements) without language identifier
      // (default: 'javascript')
-    default_lang: 'turtle',
+    default_lang: 'javascript',
     // A specific CodeMirror theme to use (default: 'default')
     theme: 'zenburn',
     // The version number of CodeMirror to use
