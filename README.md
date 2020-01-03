@@ -32,7 +32,7 @@ Reveal.initialize({
     path: '/codemirror/',
   },
   dependencies: [
-    { src: 'plugin/codemirror/revealjs-plugin-codemirror.js' },
+    { src: 'plugin/codemirror/revealjs-plugin-codemirror.js', async: true },
     ...
   ],
   ...
