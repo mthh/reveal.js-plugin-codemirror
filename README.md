@@ -2,7 +2,7 @@
 
 *Enjoy a nice syntax highlighting for languages not supported by highlight.js on your reveal.js slides !*
 
-#### Installation
+### Installation
 
 Simply place the content of the `codemirror`-directory within the reveal.js `plugin` directory.
 
@@ -10,7 +10,7 @@ This plugin it juste a wrapper to call `CodeMirror.runMode` and doesn't contain 
 
 Two options are provided in order to fetch the appropriate `CodeMirror` modules, using a CDN (*JsDelivr*) or providing the path to theses modules (it allows to host theses files locally, or to use another CDN).
 
-#### Usage
+### Usage
 - Just use this plugin instead of the `highlight.js` plugin :
 
 ```js
